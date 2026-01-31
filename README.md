@@ -1,59 +1,109 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+# api prueba tecnica 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#### objetivo:
+Evaluar las competencias técnicas, criterio de diseño, buenas prácticas de desarrollo y capacidad de documentación de aspirantes a los puestos de Desarrollador de Software, mediante la construcción de una aplicación web funcional orientada al registro y administración de agencias de Cooperativa
+Cobán.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+La prueba está diseñada para medir:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [ ] Lógica de programación y estructura del código
 
-## Learning Laravel
+- [ ] Diseño frontend y experiencia de usuario
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- [ ] Arquitectura backend y uso de APIs REST
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- [ ] Modelado y manejo de base de datos
 
-## Laravel Sponsors
+- [ ] Documentación técnica y despliegue
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+Se realizo el backen en PHP con el framework de Laravel, ya que con este lenguaje me desenvuelvo mejor, por lo que comenzamos con la breve descripcion de que se realizo.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Se crearon los Middlewares del proyecto se utilizo dos, uno de roles y otro de cors. El archivo de cors son los que nos ayudara a conectarnos con la aplicaciones de exterior como fronted y apis.
 
-## Contributing
+Despues se creo la logica de autenticación, donde nos ayudara a autenticar si el usuario tiene permisos o esta desactivado.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Otro paso sera la creación del modulo de usuarios donde se creara un CRUD donde se colocara los datos personales de los que utilizaran la plataforma. De igual manera se realizara el modulo principal que es la de Agencias donde se colocara los datos idispensables para realizar el CRUD.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Dependencias
 
-## Security Vulnerabilities
+* php = 8.3
+* Composer = 2.9.1
+* git = 2.43.0
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+base de datos
 
-## License
+* mysql 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#  GITCLONE 
+
+Se recomienda tener una clave Ssh asociada a su github para tener un entorno practico. 
+
+si en dado caso no lo tiene guiarse con el siguiente video:
+
+[Configuración de claves SSH para git y github](https://www.youtube.com/watch?v=akuG7eRtaXc)
+
+se clona el repositorio:
+
+```bash
+git clone git@github.com:Raul-OXRI/prueba_tecnica.git
+```
+se debe de ingresar a la carpeta prueba_tecnica
+
+```bash
+cd prueba_tecnica
+```
+despues se debe de colocar el siguiente comando que nos ayudara a intarlar las dependecias:
+
+```bash
+composer install
+```
+despues de aver instalado las dependencias se debe copiar el env o configuracion de servicios:
+
+```bash
+cp .env.example .env
+``` 
+
+despues de esto se debe de crear una base de datos ya dependera de usted que nombre se coloque 
+
+```MYSQL
+CREATE DATABASE devprueba;
+```
+
+se debera de reemplazar estas lineas de codigo 
+
+```
+DB_CONNECTION=sqlite
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=laravel
+# DB_USERNAME=root
+# DB_PASSWORD=
+```
+
+por las siguientes:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=devprueba
+DB_USERNAME= 'nombre que se tenga de su usuario de bd'
+DB_PASSWORD= 'igual aqui depende que password tenga su usuario en la bd'
+```
+
+despues de esto se debera de hacer el siguiente comando:
+```bash
+php artisan migrate
+```
+y por ultimo se debera de ejecutar el siguiente comando:
+
+```
+php artisan serve
+```
