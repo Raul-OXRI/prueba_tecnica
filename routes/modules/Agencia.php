@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgenciaController;
 
-Route::group(['prefix' => 'agencia', 'middleware' => ['auth:sanctum', 'rol:admin.consulta']], function () {
+Route::group(['prefix' => 'agencia', 'middleware' => ['auth:sanctum', 'rol:admin, consulta']], function () {
     // las rutas de creación y actualización
     Route::post('/store', [AgenciaController::class, 'store']);
     Route::put('/update/{id}', [AgenciaController::class, 'update']);
