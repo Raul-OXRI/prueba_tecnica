@@ -18,4 +18,10 @@ class Municipio extends Model
     {
         return $this->belongsTo(Departamento::class, 'cod_departamento');
     }
+
+    //relación uno a muchos con agencia
+    public function agencias()
+    {
+        return $this->hasMany(Agencia::class, 'cod_municipio');
+    }
 }
