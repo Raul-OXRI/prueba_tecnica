@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('phone')->required()->unique();
             $table->integer('status')->default(1);
             $table->string('rol');
-            $table->string('user_img');
+            $table->string('user_img')->nullable();
             $table->foreignId('cod_agencia')->constrained('agencia');
         });
     }

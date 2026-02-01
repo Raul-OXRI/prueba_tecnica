@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'rol:admin.consulta']], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'rol:admin, consulta']], function () {
     // las rutas de creación y actualización
     Route::post('/store', [UserController::class, 'store']);
     Route::put('/update/{id}', [UserController::class, 'update']);
