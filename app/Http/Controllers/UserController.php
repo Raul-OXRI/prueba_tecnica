@@ -29,15 +29,14 @@ class UserController extends Controller
             'email',
             'phone',
             'rol',
-            'cod_municipio',
-            'cod_iglesia',
+            'cod_agencia',
         ]);
 
         $data['password'] = Hash::make($validateData['password']);
 
         $data['status'] = 1;
 
-        $user = User::created($data);
+        $user = User::create($data);
 
         //aqui falta lo que ingreso de img 
 
@@ -49,7 +48,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
 
         if (!$user) {
             return response()->json([
@@ -57,15 +56,15 @@ class UserController extends Controller
             ], 404);
         }
 
-        $validateData = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'last_name' => 'sometimes|required|string|max:255',
-            'username' => 'sometimes|required|string|max:255|unique:users,username,' . $user->id,
-            'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'sometimes|required|string|min:8',
+        $validatedData = $request->validate([
+            'name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'username' => 'nullable|string|max:255|unique:users,username,' . $id,
+            'email' => 'nullable|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8',
             'phone' => 'nullable|string|regex:/^[0-9+\-\s]{8,15}$/',
-            'rol' => 'sometimes|required|string|max:50',
-            'user_img' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10240',
+            'status' => 'nullable|in:1,2',
+            'rol' => 'nullable|string|max:50',
             'cod_agencia' => 'nullable|exists:agencia,id',
         ]);
 
@@ -76,12 +75,12 @@ class UserController extends Controller
             'email',
             'phone',
             'rol',
-            'cod_municipio',
-            'cod_iglesia',
+            'status',
+            'cod_agencia',
         ]);
 
-        if ($request->has('password')) {
-            $data['password'] = Hash::make($validateData['password']);
+        if (!empty($validatedData['password'] ?? null)) {
+            $data['password'] = Hash::make($validatedData['password']);
         }
 
         $user->update($data);
