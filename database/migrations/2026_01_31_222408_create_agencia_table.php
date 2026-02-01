@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('codigo_agencia');
             $table->string('address');
             $table->string('phone');
-            $table->string('status');
+            $table->integer('status');
             $table->string('img')->nullable();
             $table->decimal('longitud', 10, 7);
             $table->decimal('latitud', 10, 7);

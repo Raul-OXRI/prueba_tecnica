@@ -32,4 +32,10 @@ class Agencia extends Model
     {
         return $this->hasMany(Horario::class, 'cod_agencia');
     }
+
+    //relación uno a muchos con usuario
+    public function usuarios()
+    {
+        return $this->hasMany(User::class, 'cod_agencia');
+    }
 }

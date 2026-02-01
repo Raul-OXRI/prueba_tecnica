@@ -103,7 +103,7 @@ class AgenciaController extends Controller
     // Obtener una agencia con su municipio y departamento
     public function showagencia($id)
     {
-        $agencia = Agencia::with('municipio.departamento')->get();
+        $agencia = Agencia::with('municipio.departamento')->find($id);
 
         return response()->json([
             'message' => 'Agencia obtenida exitosamente',

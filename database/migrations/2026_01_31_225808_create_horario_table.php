@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('dia');
             $table->time('hora_apertura');
             $table->time('hora_cierre');
-            $table->string('status');
+            $table->integer('status');
             $table->foreignId('cod_agencia')->constrained('agencia');
             $table->timestamps();
         });
