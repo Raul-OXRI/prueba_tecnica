@@ -22,6 +22,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'last_name',
+        'username',
+        'phone',
+        'status',
+        'rol',
+        'user_img',
+        'cod_agencia',
     ];
 
     /**
@@ -45,5 +52,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    //relación inversa muchos a uno con agencia
+    public function agencia()
+    {
+        return $this->belongsTo(Agencia::class, 'cod_agencia');
     }
 }
