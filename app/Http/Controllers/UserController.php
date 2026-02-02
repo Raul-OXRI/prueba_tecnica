@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Services\ImageFormatter;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -36,9 +38,13 @@ class UserController extends Controller
 
         $data['status'] = 1;
 
-        $user = User::create($data);
+        if ($request->hasFile('user_img')) {
+            $path = ImageFormatter::formatAndUpload($request->file('user_img'), 'profiles', 1);
+            Storage::disk('s3')->setVisibility($path, 'public');
+            $data['user_img'] = Storage::disk('s3')->url($path);
+        }
 
-        //aqui falta lo que ingreso de img 
+        $user = User::create($data);
 
         return response()->json([
             'message' => 'Usuario creado exitosamente',
@@ -133,6 +139,47 @@ class UserController extends Controller
         return response()->json([
             'message' => 'Contraseña actualizada exitosamente',
             'user' => $user,
+        ], 200);
+    }
+
+    public function updatePerfil(Request $request, $id)
+    {
+        // filtrar el usuario por id
+        $user = User::find($id);
+
+        // verificar si el usuario existe
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        // validar la imagen
+        $request->validate([
+            'user_img' => 'required|image|mimes:jpeg,png,jpg,webp|max:10240',
+        ]);
+
+        // procesar y subir la imagen
+        if ($request->hasFile('user_img')) {
+            // eliminar la imagen anterior si existe
+            if ($user->user_img) {
+                $oldPath = str_replace(Storage::disk('s3')->url(''), '', $user->user_img);
+                Storage::disk('s3')->delete($oldPath);
+            }
+
+            // subir la nueva imagen
+            $path = ImageFormatter::formatAndUpload(
+                $request->file('user_img'),
+                'profiles',
+                1
+            );
+
+            // establecer la visibilidad pública
+            $user->user_img = Storage::disk('s3')->url($path);
+            $user->save();
+        }
+
+        return response()->json([
+            'message' => 'Imagen de usuario actualizada exitosamente',
+            'user' => $user->fresh(),
         ], 200);
     }
 
