@@ -21,6 +21,7 @@ class CorsMiddleware
         // Definir los orígenes permitidos
         $allowedOrigins = [
             'http://localhost:5173',                // Vite en local
+            'https://reactprueba-production.up.railway.app', // tu frontend en Railway
             'https://front-skynet.onrender.com',    // tu frontend
         ];
 
