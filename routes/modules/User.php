@@ -8,6 +8,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum', 'rol:admin, c
     Route::post('/store', [UserController::class, 'store']);
     Route::put('/update/{id}', [UserController::class, 'update']);
     Route::put('/updatepass/{id}', [UserController::class, 'updatePass']);
+    Route::post('/updateperfil/{id}', [UserController::class, 'updatePerfil']);
 
     // las rutas de activación y desactivación
     Route::put('/desactivar/{user}', [UserController::class, 'destroy']);

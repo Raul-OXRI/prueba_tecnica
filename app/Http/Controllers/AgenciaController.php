@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Agencia;
+use App\Services\ImageFormatter;
+
 
 class AgenciaController extends Controller
 {
@@ -17,10 +19,9 @@ class AgenciaController extends Controller
             'codigo_agencia' => 'required|string|max:100',
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'status' => 'required|string|max:50',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'longitud' => 'required|string|max:100',
-            'latitud' => 'required|string|max:100',
+            'longitud' => 'required|numeric|between:-180,180',
+            'latitud' => 'required|numeric|between:-90,90',
             'cod_municipio' => 'required|integer',
         ]);
 
@@ -36,6 +37,12 @@ class AgenciaController extends Controller
         ]);
 
         $data['status'] = 1; // Establecer estado activo por defecto
+
+        if ($request->hasFile('img')) {
+            $path = ImageFormatter::formatAndUpload($request->file('img'), 'agencias', 1);
+            Storage::disk('s3')->setVisibility($path, 'public');
+            $data['img'] = Storage::disk('s3')->url($path);
+        }
 
         $agencia = Agencia::create($data);
 
@@ -138,7 +145,8 @@ class AgenciaController extends Controller
     }
 
     // Obtener todas las agencias activas
-    public function showactivos(){
+    public function showactivos()
+    {
         $agencias = Agencia::where('status', 1)->get();
         return response()->json([
             'message' => 'Agencias activas obtenidas exitosamente',
@@ -147,7 +155,8 @@ class AgenciaController extends Controller
     }
 
     // Obtener todas las agencias inactivas
-    public function showinactivos(){
+    public function showinactivos()
+    {
         $agencias = Agencia::where('status', 2)->get();
         return response()->json([
             'message' => 'Agencias inactivas obtenidas exitosamente',

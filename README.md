@@ -107,3 +107,9 @@ y por ultimo se debera de ejecutar el siguiente comando:
 ```
 php artisan serve
 ```
+
+
+```bash
+composer require intervention/image:^3.0
+
+```
