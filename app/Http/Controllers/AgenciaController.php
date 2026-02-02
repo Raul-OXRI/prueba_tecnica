@@ -69,7 +69,6 @@ class AgenciaController extends Controller
             'codigo_agencia' => 'sometimes|required|string|max:100',
             'address' => 'sometimes|required|string|max:255',
             'phone' => 'sometimes|required|string|max:20',
-            'status' => 'sometimes|required|string|max:50',
             'longitud' => 'sometimes|required|string|max:100',
             'latitud' => 'sometimes|required|string|max:100',
             'cod_municipio' => 'sometimes|required|integer',
@@ -121,7 +120,7 @@ class AgenciaController extends Controller
     // Buscar agencias por nombre
     public function searchBy($name)
     {
-        $agencias = Agencia::with('municipio.departamento')->where('name', 'LIKE', '%' . $name . '%')->get();
+        $agencias = Agencia::with('municipio.departamento')->where('status', 1)->where('name', 'LIKE', '%' . $name . '%')->get();
 
         return response()->json([
             'message' => 'Resultado de la busqueda',
