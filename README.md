@@ -1,115 +1,251 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center">
+  <a href="https://laravel.com" target="_blank">
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="380" alt="Laravel Logo">
+  </a>
+</p>
 
-
-# api prueba tecnica 
-
-#### objetivo:
-Evaluar las competencias técnicas, criterio de diseño, buenas prácticas de desarrollo y capacidad de documentación de aspirantes a los puestos de Desarrollador de Software, mediante la construcción de una aplicación web funcional orientada al registro y administración de agencias de Cooperativa
-Cobán.
-
-La prueba está diseñada para medir:
-
-- [ ] Lógica de programación y estructura del código
-
-- [ ] Diseño frontend y experiencia de usuario
-
-- [ ] Arquitectura backend y uso de APIs REST
-
-- [ ] Modelado y manejo de base de datos
-
-- [ ] Documentación técnica y despliegue
+# API – Prueba Técnica  
+## Sistema de Gestión de Agencias – Cooperativa Cobán
 
 ---
 
-Se realizo el backen en PHP con el framework de Laravel, ya que con este lenguaje me desenvuelvo mejor, por lo que comenzamos con la breve descripcion de que se realizo.
+## Objetivo del Proyecto
 
-Se crearon los Middlewares del proyecto se utilizo dos, uno de roles y otro de cors. El archivo de cors son los que nos ayudara a conectarnos con la aplicaciones de exterior como fronted y apis.
+El objetivo de esta prueba técnica es **evaluar las competencias técnicas**, el **criterio de diseño**, el uso de **buenas prácticas de desarrollo**, la **arquitectura de software** y la **capacidad de documentación** del aspirante al puesto de **Desarrollador de Software**.
 
-Despues se creo la logica de autenticación, donde nos ayudara a autenticar si el usuario tiene permisos o esta desactivado.
-
-Otro paso sera la creación del modulo de usuarios donde se creara un CRUD donde se colocara los datos personales de los que utilizaran la plataforma. De igual manera se realizara el modulo principal que es la de Agencias donde se colocara los datos idispensables para realizar el CRUD.
+La evaluación se realiza mediante la construcción de una **aplicación web funcional**, orientada al **registro, administración y visualización de agencias** de la Cooperativa Cobán.
 
 ---
 
-## Dependencias
+## Aspectos Evaluados
 
-* php = 8.3
-* Composer = 2.9.1
-* git = 2.43.0
+- [ ] Lógica de programación y estructura del código  
+- [ ] Arquitectura backend y diseño de APIs REST  
+- [ ] Modelado y manejo de base de datos  
+- [ ] Seguridad, autenticación y roles  
+- [ ] Integración con servicios externos  
+- [ ] Diseño frontend y experiencia de usuario  
+- [ ] Documentación técnica  
+- [ ] Preparación para despliegue  
 
-base de datos
+---
 
-* mysql 
+## Descripción General de la Solución
 
-#  GITCLONE 
+La solución se divide en dos partes principales:
 
-Se recomienda tener una clave Ssh asociada a su github para tener un entorno practico. 
+- **Backend (API REST)** desarrollado en **Laravel**
+- **Frontend** desarrollado en **React**
 
-si en dado caso no lo tiene guiarse con el siguiente video:
+El sistema permite:
 
-[Configuración de claves SSH para git y github](https://www.youtube.com/watch?v=akuG7eRtaXc)
+- Autenticación de usuarios
+- Control de acceso por roles
+- Gestión de usuarios
+- Gestión de agencias
+- Manejo de estados (activo / inactivo)
+- Integración con Amazon S3 para almacenamiento de imágenes
+- Preparación para consumo desde aplicaciones externas
 
-se clona el repositorio:
+---
+
+##  Arquitectura de la Solución
+
+### Backend – API REST
+- Arquitectura RESTful
+- Autenticación basada en tokens
+- Middleware para control de acceso
+- Validaciones centralizadas
+- Separación clara entre controladores, modelos y servicios
+
+### Frontend
+- Aplicación SPA
+- Consumo de la API mediante Axios
+- Interfaces modernas y responsivas
+- Enfoque en experiencia de usuario
+
+---
+
+##  Seguridad y Middleware
+
+Se implementaron los siguientes middlewares:
+
+- **Middleware de Autenticación**  
+  Verifica que el usuario esté autenticado mediante token.
+
+- **Middleware de Roles**  
+  Restringe el acceso a rutas según el rol del usuario (admin, consulta, etc.).
+
+- **Middleware CORS**  
+  Permite la comunicación segura entre el backend y el frontend u otros clientes externos.
+
+---
+
+##  Autenticación
+
+El sistema valida:
+
+- Credenciales del usuario
+- Estado del usuario (activo / inactivo)
+- Rol asignado
+
+Solo los usuarios autorizados pueden acceder a los módulos protegidos del sistema.
+
+---
+
+##  Módulo de Usuarios
+
+Permite:
+
+- Crear usuarios
+- Actualizar información
+- Activar / desactivar usuarios
+- Asignar roles
+- Controlar acceso al sistema
+
+Incluye un **CRUD completo** siguiendo buenas prácticas de validación y seguridad.
+
+---
+
+##  Módulo de Agencias
+
+Es el módulo principal del sistema. Permite:
+
+- Registrar agencias
+- Actualizar información
+- Consultar agencias activas e inactivas
+- Asociar ubicación
+- Controlar estado de cada agencia
+
+Toda la información se gestiona mediante endpoints REST.
+
+---
+
+##  Tecnologías Utilizadas
+
+### Backend
+- PHP 8.3
+- Laravel
+- MySQL
+- Amazon S3
+- Intervention Image
+
+### Frontend
+- React
+- Tailwind CSS
+- DaisyUI
+- FontAwesome
+- Google Maps JavaScript API (opcional)
+- Waze (redireccionamiento)
+
+### Herramientas
+- Composer 2.9.1
+- Git 2.43.0
+
+---
+
+##  Requisitos Previos
+
+Antes de iniciar, asegúrese de tener instalado:
+
+- PHP >= 8.3
+- Composer
+- Git
+- MySQL
+
+---
+
+##  Clonación del Repositorio
+
+Se recomienda tener una **clave SSH configurada en GitHub**.
+
+📺 Video de referencia:  
+[Configuración de claves SSH para Git y GitHub](https://www.youtube.com/watch?v=akuG7eRtaXc)
+
+### Clonar el repositorio
 
 ```bash
 git clone git@github.com:Raul-OXRI/prueba_tecnica.git
 ```
-se debe de ingresar a la carpeta prueba_tecnica
 
-```bash
+### Ingresar al proyecto:
+
+```
 cd prueba_tecnica
-```
-despues se debe de colocar el siguiente comando que nos ayudara a intarlar las dependecias:
 
-```bash
+```
+
+### Instalación del Backend
+
+```
 composer install
-```
-despues de aver instalado las dependencias se debe copiar el env o configuracion de servicios:
 
-```bash
+```
+
+### Configuarar variables de entorno 
+
+```
 cp .env.example .env
-``` 
 
-despues de esto se debe de crear una base de datos ya dependera de usted que nombre se coloque 
+```
 
-```MYSQL
+### Crear base de datos
+```
 CREATE DATABASE devprueba;
-```
-
-se debera de reemplazar estas lineas de codigo 
 
 ```
-DB_CONNECTION=sqlite
-# DB_HOST=127.0.0.1
-# DB_PORT=3306
-# DB_DATABASE=laravel
-# DB_USERNAME=root
-# DB_PASSWORD=
-```
 
-por las siguientes:
-
+### Configurar conexión en .env
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=devprueba
-DB_USERNAME= 'nombre que se tenga de su usuario de bd'
-DB_PASSWORD= 'igual aqui depende que password tenga su usuario en la bd'
+DB_USERNAME=SU_USUARIO
+DB_PASSWORD=SU_PASSWORD
+
 ```
 
-despues de esto se debera de hacer el siguiente comando:
-```bash
+### Ejecutar migraciones
+
+```
 php artisan migrate
-```
-y por ultimo se debera de ejecutar el siguiente comando:
 
 ```
-php artisan serve
+
+### Iniciar servidor
+```
+php artisan migrate
+
 ```
 
+## Amazon S3 – Manejo de Imágenes
 
-```bash
+El proyecto utiliza Amazon S3 para almacenamiento de imágenes. Para el procesamiento de imágenes se utiliza:
+
+```
 composer require intervention/image:^3.0
 
 ```
+
+## Solución de Problemas (Dependencias PHP)
+Si presenta errores relacionados con extensiones de PHP, ejecute:
+
+```
+sudo apt install -y git unzip curl \
+php8.2 php8.2-cli php8.2-fpm php8.2-mysql \
+php8.2-mbstring php8.2-zip php8.2-gd \
+php8.2-curl php8.2-xml php8.2-bcmath \
+libpng-dev libjpeg-dev libfreetype6-dev
+
+
+```
+
+## Despliegue
+
+El proyecto está preparado para ser desplegado en plataformas como:
+
+Railway
+
+Las variables de entorno deben configurarse correctamente en producción.
+

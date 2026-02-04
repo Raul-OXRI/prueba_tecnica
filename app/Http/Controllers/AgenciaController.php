@@ -163,4 +163,41 @@ class AgenciaController extends Controller
         ], 200);
     }
     //solo falta la implemntacion de imagenes
+
+    public function updateImg(Request $request, $id)
+    {
+        $agencia = Agencia::find($id);
+
+        if (!$agencia) {
+            return response()->json([
+                'message' => 'Agencia no encontrada'
+            ], 404);
+        }
+
+        $request->validate([
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('img')) {
+
+            if ($agencia->img) {
+                $oldPath = str_replace(Storage::disk('s3')->url(''), '', $agencia->img);
+                Storage::disk('s3')->delete($oldPath);
+            }
+            
+            $path = ImageFormatter::formatAndUpload(
+                $request->file('img'),
+                'agencias',
+                1
+            );
+
+            $agencia->img = Storage::disk('s3')->url($path);
+            $agencia->save();
+        }
+
+        return response()->json([
+            'message' => 'Imagen de la agencia actualizada exitosamente',
+            'agencia' => $agencia
+        ], 200);
+    }
 }
