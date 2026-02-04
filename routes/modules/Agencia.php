@@ -7,6 +7,7 @@ Route::group(['prefix' => 'agencia', 'middleware' => ['auth:sanctum', 'rol:admin
     // las rutas de creación y actualización
     Route::post('/store', [AgenciaController::class, 'store']);
     Route::put('/update/{id}', [AgenciaController::class, 'update']);
+    Route::post('/updateImg/{id}', [AgenciaController::class, 'updateImg']);
 
     // las rutas de activación y desactivación
     Route::put('/desactivar/{agencia}', [AgenciaController::class, 'destroy']);
