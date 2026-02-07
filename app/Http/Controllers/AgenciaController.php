@@ -146,7 +146,7 @@ class AgenciaController extends Controller
     // Obtener todas las agencias activas
     public function showactivos()
     {
-        $agencias = Agencia::where('status', 1)->get();
+        $agencias = Agencia::with('municipio.departamento')->where('status', 1)->get();
         return response()->json([
             'message' => 'Agencias activas obtenidas exitosamente',
             'agencias' => $agencias
@@ -156,7 +156,7 @@ class AgenciaController extends Controller
     // Obtener todas las agencias inactivas
     public function showinactivos()
     {
-        $agencias = Agencia::where('status', 2)->get();
+        $agencias = Agencia::with('municipio.departamento')->where('status', 2)->get();
         return response()->json([
             'message' => 'Agencias inactivas obtenidas exitosamente',
             'agencias' => $agencias
